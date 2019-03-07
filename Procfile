@@ -1,1 +1,1 @@
-web: gunicorn lionblog.wsgi --log-file -
+web: gunicorn tracord_backend.wsgi --log-file -
