@@ -1,3 +1,4 @@
+import dj_database_url
 """
 Django settings for tracord_backend project.
 
@@ -21,11 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '*i(_2evu41+%89t$-oh^6*&rc6w&cic0t61%p%!6t(omofrx@v'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '*i(_2evu41+%89t$-oh^6*&rc6w&cic0t61%p%!6t(omofrx@v')
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY', '*i(_2evu41+%89t$-oh^6*&rc6w&cic0t61%p%!6t(omofrx@v')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'post.apps.PostConfig',
 ]
 
@@ -51,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'tracord_backend.urls'
@@ -124,7 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 STATIC_TMP = os.path.join(BASE_DIR, 'static')
@@ -136,6 +141,5 @@ MEDIA_URL = '/upload_files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
