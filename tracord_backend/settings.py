@@ -143,3 +143,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+# CORS 설정
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
