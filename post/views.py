@@ -19,8 +19,8 @@ class JSONResponse(HttpResponse):
 def post_list(request):
     if request.method == 'GET':
         posts = Post.objects.all()
-        posts_serializer = PostSerializer(posts, many=True)
-        return JSONResponse(posts_serializer.data)
+        posts_seriacreate_atlizer = PostSerializer(posts, many=True)
+        return JSONResponse(posts_seriacreate_atlizer.data)
 
     elif request.method == 'POST':
         post_data = JSONParser().parse(request)
